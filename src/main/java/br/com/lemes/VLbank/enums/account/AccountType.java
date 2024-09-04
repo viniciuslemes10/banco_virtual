@@ -1,4 +1,4 @@
-package br.com.lemes.VLbank.enums;
+package br.com.lemes.VLbank.enums.account;
 
 public enum AccountType {
     CURRENT,

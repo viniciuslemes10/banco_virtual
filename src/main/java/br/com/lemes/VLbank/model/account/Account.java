@@ -1,6 +1,6 @@
 package br.com.lemes.VLbank.model.account;
 
-import br.com.lemes.VLbank.enums.AccountType;
+import br.com.lemes.VLbank.enums.account.AccountType;
 import br.com.lemes.VLbank.model.bank.Agency;
 import br.com.lemes.VLbank.model.bank.Bank;
 import br.com.lemes.VLbank.model.user.User;
