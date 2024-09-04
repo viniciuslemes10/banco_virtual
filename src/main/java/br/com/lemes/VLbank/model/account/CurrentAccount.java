@@ -23,14 +23,4 @@ public class CurrentAccount extends Account {
     @Column(name = "account_limit")
     private Double accountLimit;
 
-    /**
-     * Referência à taxa de transação associada a esta conta.
-     * Esta taxa pode ser um valor fixo ou percentual aplicado a
-     * operações realizadas na conta. Permite a configuração flexível
-     * das taxas de transação e pode variar conforme o tipo de conta
-     * ou política do banco.
-     */
-    @ManyToOne
-    @JoinColumn(name = "transaction_fee_id")
-    private TransactionFee transactionFee;
 }

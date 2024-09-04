@@ -20,10 +20,6 @@ public class CurrentAndSavingsAccount extends Account {
     @Column(name = "savings_balance")
     private Double savingsBalance;
 
-    @ManyToOne
-    @JoinColumn(name = "transaction_fee_id")
-    private TransactionFee transactionFee;
-
     @Column(name = "interest_rate")
     private Double interestRate;
 

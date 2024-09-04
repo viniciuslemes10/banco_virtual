@@ -18,8 +18,4 @@ public class SavingsAccount extends Account{
 
     @Column(name = "interest_frequency")
     private String interestFrequency;
-
-    @ManyToOne
-    @JoinColumn(name = "transaction_fee_id")
-    private TransactionFee transactionFee;
 }

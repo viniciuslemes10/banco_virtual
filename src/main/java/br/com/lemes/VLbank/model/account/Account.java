@@ -9,6 +9,7 @@ import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,10 +23,10 @@ public abstract class Account {
     private Long id;
 
     @Column(name = "account_number", unique = true, nullable = false)
-    private Integer accountNumber;
+    private String accountNumber;
 
     @Column(name = "balance", nullable = false)
-    private Double balance;
+    private BigDecimal balance;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "account_type", insertable = false, updatable = false)
