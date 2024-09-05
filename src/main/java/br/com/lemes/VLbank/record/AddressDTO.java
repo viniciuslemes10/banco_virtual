@@ -5,6 +5,7 @@ public record AddressDTO(
         String number,
         String neighborhood,
         String city,
+        String complement,
         String state,
         String postalCode
 ) {

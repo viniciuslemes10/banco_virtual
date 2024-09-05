@@ -13,4 +13,7 @@ public record AccountDTO(
         Long agencyId,
         Long userId
 ) {
+    public AccountType getAccountType() {
+        return this.accountType;
+    }
 }
