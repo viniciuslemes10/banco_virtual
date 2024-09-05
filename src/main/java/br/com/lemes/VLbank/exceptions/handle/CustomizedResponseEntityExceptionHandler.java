@@ -7,6 +7,7 @@ import br.com.lemes.VLbank.exceptions.account.InvalidArgumentForAccountTypeExcep
 import br.com.lemes.VLbank.exceptions.account.InvalidBalanceException;
 import br.com.lemes.VLbank.exceptions.agency.AgencyNotFoundException;
 import br.com.lemes.VLbank.exceptions.bank.BankNotFoundException;
+import br.com.lemes.VLbank.exceptions.bank.InvalidBankCodeException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -76,6 +77,15 @@ public class CustomizedResponseEntityExceptionHandler {
 
     @ExceptionHandler(InvalidBalanceException.class)
     public ResponseEntity<ExceptionResponse> handleInvalidBalanceException(Exception ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false));
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidBankCodeException.class)
+    public ResponseEntity<ExceptionResponse> handleInvalidBankCodeException(Exception ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(
                 new Date(),
                 ex.getMessage(),
