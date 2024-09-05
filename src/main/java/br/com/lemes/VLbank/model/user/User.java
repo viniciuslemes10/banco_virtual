@@ -1,7 +1,7 @@
 package br.com.lemes.VLbank.model.user;
 
 import br.com.lemes.VLbank.model.account.Account;
-import br.com.lemes.VLbank.record.UserDTO;
+import br.com.lemes.VLbank.record.user.UserDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 

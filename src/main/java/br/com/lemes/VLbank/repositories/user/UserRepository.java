@@ -1,4 +1,4 @@
-package br.com.lemes.VLbank.repositories;
+package br.com.lemes.VLbank.repositories.user;
 
 import br.com.lemes.VLbank.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;

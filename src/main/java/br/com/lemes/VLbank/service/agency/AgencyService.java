@@ -1,8 +1,8 @@
-package br.com.lemes.VLbank.service;
+package br.com.lemes.VLbank.service.agency;
 
-import br.com.lemes.VLbank.exceptions.AgencyNotFoundException;
+import br.com.lemes.VLbank.exceptions.agency.AgencyNotFoundException;
 import br.com.lemes.VLbank.model.bank.Agency;
-import br.com.lemes.VLbank.repositories.AgencyRepository;
+import br.com.lemes.VLbank.repositories.agency.AgencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

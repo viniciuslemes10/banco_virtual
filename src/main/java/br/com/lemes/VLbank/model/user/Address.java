@@ -1,6 +1,6 @@
 package br.com.lemes.VLbank.model.user;
 
-import br.com.lemes.VLbank.record.AddressDTO;
+import br.com.lemes.VLbank.record.account.AddressDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.Data;

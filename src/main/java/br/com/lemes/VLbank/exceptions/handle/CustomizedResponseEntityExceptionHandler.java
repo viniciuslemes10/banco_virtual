@@ -1,6 +1,12 @@
 package br.com.lemes.VLbank.exceptions.handle;
 
 import br.com.lemes.VLbank.exceptions.*;
+import br.com.lemes.VLbank.exceptions.account.AccountNotFoundException;
+import br.com.lemes.VLbank.exceptions.account.AccountNumberAlreadyExistsException;
+import br.com.lemes.VLbank.exceptions.account.InvalidArgumentForAccountTypeException;
+import br.com.lemes.VLbank.exceptions.account.InvalidBalanceException;
+import br.com.lemes.VLbank.exceptions.agency.AgencyNotFoundException;
+import br.com.lemes.VLbank.exceptions.bank.BankNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

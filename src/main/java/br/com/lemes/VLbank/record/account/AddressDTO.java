@@ -1,4 +1,4 @@
-package br.com.lemes.VLbank.record;
+package br.com.lemes.VLbank.record.account;
 
 public record AddressDTO(
         String street,

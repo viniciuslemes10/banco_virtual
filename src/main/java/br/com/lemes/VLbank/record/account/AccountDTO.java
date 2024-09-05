@@ -1,4 +1,4 @@
-package br.com.lemes.VLbank.record;
+package br.com.lemes.VLbank.record.account;
 
 import br.com.lemes.VLbank.enums.account.AccountType;
 

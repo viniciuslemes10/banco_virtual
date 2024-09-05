@@ -1,12 +1,13 @@
-package br.com.lemes.VLbank.service;
+package br.com.lemes.VLbank.service.user;
 
 import br.com.lemes.VLbank.enums.account.AccountType;
-import br.com.lemes.VLbank.exceptions.AccountNotFoundException;
-import br.com.lemes.VLbank.exceptions.InvalidArgumentForAccountTypeException;
+import br.com.lemes.VLbank.exceptions.account.AccountNotFoundException;
+import br.com.lemes.VLbank.exceptions.account.InvalidArgumentForAccountTypeException;
 import br.com.lemes.VLbank.model.user.User;
-import br.com.lemes.VLbank.record.AccountDTO;
-import br.com.lemes.VLbank.record.UserDTO;
-import br.com.lemes.VLbank.repositories.UserRepository;
+import br.com.lemes.VLbank.record.account.AccountDTO;
+import br.com.lemes.VLbank.record.user.UserDTO;
+import br.com.lemes.VLbank.repositories.user.UserRepository;
+import br.com.lemes.VLbank.service.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

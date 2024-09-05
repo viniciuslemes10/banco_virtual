@@ -1,7 +1,7 @@
-package br.com.lemes.VLbank.service;
+package br.com.lemes.VLbank.service.account;
 
-import br.com.lemes.VLbank.exceptions.AccountNumberAlreadyExistsException;
-import br.com.lemes.VLbank.exceptions.InvalidBalanceException;
+import br.com.lemes.VLbank.exceptions.account.AccountNumberAlreadyExistsException;
+import br.com.lemes.VLbank.exceptions.account.InvalidBalanceException;
 import br.com.lemes.VLbank.model.account.Account;
 import br.com.lemes.VLbank.model.account.CurrentAccount;
 import br.com.lemes.VLbank.model.account.CurrentAndSavingsAccount;
@@ -9,8 +9,10 @@ import br.com.lemes.VLbank.model.account.SavingsAccount;
 import br.com.lemes.VLbank.model.bank.Agency;
 import br.com.lemes.VLbank.model.bank.Bank;
 import br.com.lemes.VLbank.model.user.User;
-import br.com.lemes.VLbank.record.AccountDTO;
-import br.com.lemes.VLbank.repositories.AccountRepository;
+import br.com.lemes.VLbank.record.account.AccountDTO;
+import br.com.lemes.VLbank.repositories.account.AccountRepository;
+import br.com.lemes.VLbank.service.agency.AgencyService;
+import br.com.lemes.VLbank.service.bank.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
