@@ -25,7 +25,7 @@ public class Transaction {
     private Account account;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "expense_type")
+    @Column(name = "expense_type", nullable = false )
     private ExpenseType expenseType;
 
     @Column(name = "description")

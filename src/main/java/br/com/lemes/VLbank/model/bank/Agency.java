@@ -1,7 +1,10 @@
 package br.com.lemes.VLbank.model.bank;
 
+import br.com.lemes.VLbank.model.account.Account;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Table(name = "agency")
@@ -20,4 +23,7 @@ public class Agency {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bank_id", nullable = false)
     private Bank bank;
+
+    @OneToMany(mappedBy = "agency", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Account> accounts;
 }
