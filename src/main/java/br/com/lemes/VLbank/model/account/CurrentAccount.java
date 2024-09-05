@@ -1,10 +1,17 @@
 package br.com.lemes.VLbank.model.account;
 
+import br.com.lemes.VLbank.enums.account.AccountType;
+import br.com.lemes.VLbank.model.bank.Agency;
+import br.com.lemes.VLbank.model.bank.Bank;
+import br.com.lemes.VLbank.record.AccountDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @DiscriminatorValue("CURRENT")
@@ -21,6 +28,16 @@ public class CurrentAccount extends Account {
      *  * crédito definido.
      */
     @Column(name = "account_limit")
-    private Double accountLimit;
+    private BigDecimal accountLimit;
 
+    public CurrentAccount(AccountDTO data, Bank bank, Agency agency) {
+        this.setAccountNumber(data.accountNumber());
+        this.setBalance(data.balance());
+        this.setAccountType(AccountType.CURRENT);
+        this.setBank(bank);
+        this.setAgency(agency);
+        this.setCreatedDate(LocalDateTime.now());
+        this.setUpdatedDate(LocalDateTime.now());
+        this.accountLimit = new BigDecimal(100);
+    }
 }

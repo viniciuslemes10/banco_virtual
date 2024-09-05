@@ -1,6 +1,7 @@
 package br.com.lemes.VLbank.model.user;
 
 import br.com.lemes.VLbank.model.account.Account;
+import br.com.lemes.VLbank.record.UserDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -53,4 +54,21 @@ public class User {
 
     @Column(name = "recovery_code")
     private String recoveryCode;
+
+    public User(UserDTO data, List<Account> accountList) {
+        this.name = data.name();
+        this.email = data.email();
+        this.password = data.password();
+        this.address = new Address(data.address());
+        this.account = accountList;
+        this.createdDate = LocalDateTime.now();
+        this.updatedDate = LocalDateTime.now();
+        this.cpfOrCnpj = data.cpfOrCnpj();
+        this.accountNotExpired = true;
+        this.accountNotBlocked = true;
+        this.credentialsNotExpired = true;
+        this.enabled = true;
+        this.recoveryCode = null;
+
+    }
 }

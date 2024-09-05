@@ -1,5 +1,6 @@
 package br.com.lemes.VLbank.model.user;
 
+import br.com.lemes.VLbank.record.AddressDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.Data;
@@ -27,4 +28,14 @@ public class Address {
 
     @Column(nullable = false)
     private String postalCode;
+
+    public Address(AddressDTO data) {
+        this.street = data.street();
+        this.number = data.number();
+        this.complement = data.complement();
+        this.neighborhood = data.neighborhood();
+        this.city = data.city();
+        this.state = data.state();
+        this.postalCode = data.postalCode();
+    }
 }
