@@ -51,8 +51,6 @@ public class UserService {
                 .map(AccountDTO::getAccountType)
                 .allMatch(validAccountTypes::contains);
 
-        log.info("***************** {}", allTypesValid);
-
         if (!allTypesValid) {
             throw new InvalidArgumentForAccountTypeException("One or more account types are invalid.");
         }
