@@ -55,12 +55,11 @@ public class User {
     @Column(name = "recovery_code")
     private String recoveryCode;
 
-    public User(UserDTO data, List<Account> accountList) {
+    public User(UserDTO data) {
         this.name = data.name();
         this.email = data.email();
         this.password = data.password();
         this.address = new Address(data.address());
-        this.account = accountList;
         this.createdDate = LocalDateTime.now();
         this.updatedDate = LocalDateTime.now();
         this.cpfOrCnpj = data.cpfOrCnpj();
@@ -69,6 +68,5 @@ public class User {
         this.credentialsNotExpired = true;
         this.enabled = true;
         this.recoveryCode = null;
-
     }
 }

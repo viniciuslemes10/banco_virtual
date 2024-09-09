@@ -3,6 +3,7 @@ package br.com.lemes.VLbank.model.account;
 import br.com.lemes.VLbank.enums.account.AccountType;
 import br.com.lemes.VLbank.model.agency.Agency;
 import br.com.lemes.VLbank.model.bank.Bank;
+import br.com.lemes.VLbank.model.user.User;
 import br.com.lemes.VLbank.record.account.AccountDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -33,7 +34,7 @@ public class CurrentAndSavingsAccount extends Account {
     @Column(name = "interest_frequency")
     private String interestFrequency;
 
-    public CurrentAndSavingsAccount(AccountDTO data, Bank bank, Agency agency) {
+    public CurrentAndSavingsAccount(AccountDTO data, Bank bank, Agency agency, User user) {
         this.setAccountNumber(data.accountNumber());
         this.setAccountType(AccountType.CURRENT_AND_SAVINGS);
         this.setBank(bank);
@@ -44,5 +45,6 @@ public class CurrentAndSavingsAccount extends Account {
         this.interestFrequency = "MONTH";
         this.currentBalance = data.balance();
         this.savingsBalance = BigDecimal.ZERO;
+        this.setUser(user);
     }
 }

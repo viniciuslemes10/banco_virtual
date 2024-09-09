@@ -6,7 +6,7 @@ import br.com.lemes.VLbank.record.address.AddressDTO;
 
 import java.util.List;
 
-public record UserDTO(
+public record UserDetailsDTO(
         String name,
         String email,
         String password,
@@ -14,7 +14,7 @@ public record UserDTO(
         List<AccountDTO> accounts,
         String cpfOrCnpj
 ) {
-    public UserDTO(User user) {
+    public UserDetailsDTO(User user) {
         this(user.getName(), user.getEmail(), user.getPassword(),
                 new AddressDTO(user.getAddress()), user.getAccount().stream()
                         .map(AccountDTO::new)

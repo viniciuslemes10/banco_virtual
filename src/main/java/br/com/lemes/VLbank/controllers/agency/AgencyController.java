@@ -1,4 +1,4 @@
-package br.com.lemes.VLbank.controllers;
+package br.com.lemes.VLbank.controllers.agency;
 
 import br.com.lemes.VLbank.record.agency.AgencyDTO;
 import br.com.lemes.VLbank.record.agency.AgencyDetailsDTO;

@@ -3,6 +3,7 @@ package br.com.lemes.VLbank.model.account;
 import br.com.lemes.VLbank.enums.account.AccountType;
 import br.com.lemes.VLbank.model.agency.Agency;
 import br.com.lemes.VLbank.model.bank.Bank;
+import br.com.lemes.VLbank.model.user.User;
 import br.com.lemes.VLbank.record.account.AccountDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,7 +31,7 @@ public class CurrentAccount extends Account {
     @Column(name = "account_limit")
     private BigDecimal accountLimit;
 
-    public CurrentAccount(AccountDTO data, Bank bank, Agency agency) {
+    public CurrentAccount(AccountDTO data, Bank bank, Agency agency, User user) {
         this.setAccountNumber(data.accountNumber());
         this.setBalance(data.balance());
         this.setAccountType(AccountType.CURRENT);
@@ -39,5 +40,6 @@ public class CurrentAccount extends Account {
         this.setCreatedDate(LocalDateTime.now());
         this.setUpdatedDate(LocalDateTime.now());
         this.accountLimit = new BigDecimal(100);
+        this.setUser(user);
     }
 }

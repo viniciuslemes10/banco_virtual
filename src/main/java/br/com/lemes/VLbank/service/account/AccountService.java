@@ -1,5 +1,6 @@
 package br.com.lemes.VLbank.service.account;
 
+import br.com.lemes.VLbank.exceptions.account.AccountNotFoundException;
 import br.com.lemes.VLbank.exceptions.account.AccountNumberAlreadyExistsException;
 import br.com.lemes.VLbank.exceptions.account.InvalidBalanceException;
 import br.com.lemes.VLbank.model.account.Account;
@@ -17,7 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AccountService {
@@ -35,33 +39,31 @@ public class AccountService {
         return accountRepository.existsByAccountNumber(accountNumber);
     }
 
-    public List<Account> createAccountFromDTO(List<AccountDTO> accountListDTO) {
-        return accountListDTO.stream()
-                .map(dto -> {
-                    var bank = bankService.findById(dto.bankId());
-                    var agency = agencyService.findById(dto.agencyId());
-                    return mapDTOToAccount(dto, bank, agency);
-                })
-                .toList();
+    public List<Account> createAccountFromDTO(List<AccountDTO> accountListDTO, User user) {
+        List<Account> accountList = new ArrayList<>();
+        Map<Long, Bank> bankCache = new HashMap<>();
+        Map<Long, Agency> agencyCache = new HashMap<>();
+
+        for (AccountDTO dto : accountListDTO) {
+            Bank bank = bankCache.computeIfAbsent(dto.bankId(), bankService::findById);
+
+            Agency agency = agencyCache.computeIfAbsent(dto.agencyId(), agencyService::findById);
+
+            Account account = mapDTOToAccount(dto, bank, agency, user);
+
+            ensureBalanceIsPositive(dto.balance());
+            accountList.add(account);
+        }
+
+        return accountList;
     }
 
-    private Account mapDTOToAccount(AccountDTO data, Bank bank, Agency agency) {
+    private Account mapDTOToAccount(AccountDTO data, Bank bank, Agency agency, User user) {
         return switch(data.accountType()) {
-                    case CURRENT -> new CurrentAccount(data, bank, agency);
-                    case SAVINGS -> new SavingsAccount(data, bank, agency);
-                    case CURRENT_AND_SAVINGS -> new CurrentAndSavingsAccount(data, bank, agency);
+                    case CURRENT -> new CurrentAccount(data, bank, agency, user);
+                    case SAVINGS -> new SavingsAccount(data, bank, agency, user);
+                    case CURRENT_AND_SAVINGS -> new CurrentAndSavingsAccount(data, bank, agency, user);
         };
-    }
-
-    public void createAccount(List<Account> accountList, User user) {
-        accountList.stream()
-                .map(account -> {
-                    var isAccountNumber = doesAccountExist(account.getAccountNumber());
-                    checkAndThrowIfAccountNumberExists(isAccountNumber);
-                    ensureBalanceIsPositive(account.getBalance());
-                    account.setUser(user);
-                    return accountRepository.save(account);
-                });
     }
 
     private void ensureBalanceIsPositive(BigDecimal balance) {
@@ -70,10 +72,11 @@ public class AccountService {
         }
     }
 
-
-    private void checkAndThrowIfAccountNumberExists(boolean isAccountNumber) {
-        if(isAccountNumber) {
-            throw new AccountNumberAlreadyExistsException("Account number invalid!");
+    public void saveAll(List<Account> accountList) {
+        if (accountList == null || accountList.isEmpty()) {
+            throw new AccountNotFoundException("No accounts found");
         }
+
+        accountRepository.saveAll(accountList);
     }
 }

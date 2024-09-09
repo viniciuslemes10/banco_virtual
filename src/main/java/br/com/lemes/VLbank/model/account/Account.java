@@ -6,7 +6,7 @@ import br.com.lemes.VLbank.model.bank.Bank;
 import br.com.lemes.VLbank.model.transaction.Transaction;
 import br.com.lemes.VLbank.model.user.User;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -18,7 +18,11 @@ import java.util.List;
 @Table(name = "accounts")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "account_type")
-@Data
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public abstract class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,15 +38,15 @@ public abstract class Account {
     @Column(name = "account_type", insertable = false, updatable = false)
     private AccountType accountType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bank_id", nullable = false)
     private Bank bank;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "agency_id", nullable = false)
     private Agency agency;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
