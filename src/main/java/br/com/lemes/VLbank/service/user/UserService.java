@@ -6,8 +6,10 @@ import br.com.lemes.VLbank.exceptions.account.InvalidArgumentForAccountTypeExcep
 import br.com.lemes.VLbank.model.user.User;
 import br.com.lemes.VLbank.record.account.AccountDTO;
 import br.com.lemes.VLbank.record.user.UserDTO;
+import br.com.lemes.VLbank.record.user.UserDetailsDTO;
 import br.com.lemes.VLbank.repositories.user.UserRepository;
 import br.com.lemes.VLbank.service.account.AccountService;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,7 @@ public class UserService {
     @Autowired
     private AccountService accountService;
 
+    @Transactional
     private User convertToEntity(UserDTO data) {
         checkIfAccountTypeIsValid(data);
         checkIfAccountPresent(data);
@@ -68,5 +71,10 @@ public class UserService {
                         throw new AccountNotFoundException("Existing account!");
                     }
                 });
+    }
+
+    public List<UserDetailsDTO> findAll() {
+        var users = userRepository.findAll();
+        return users.stream().map(UserDetailsDTO::new).toList();
     }
 }

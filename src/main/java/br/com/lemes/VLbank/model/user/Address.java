@@ -18,9 +18,6 @@ public class Address {
     private String complement;
 
     @Column(nullable = false)
-    private String neighborhood;
-
-    @Column(nullable = false)
     private String city;
 
     @Column(nullable = false)
@@ -35,7 +32,6 @@ public class Address {
         this.street = data.street();
         this.number = data.number();
         this.complement = data.complement();
-        this.neighborhood = data.neighborhood();
         this.city = data.city();
         this.state = data.state();
         this.postalCode = data.postalCode();

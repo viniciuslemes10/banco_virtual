@@ -4,6 +4,7 @@ import br.com.lemes.VLbank.model.account.Account;
 import br.com.lemes.VLbank.record.user.UserDTO;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -54,6 +55,8 @@ public class User {
 
     @Column(name = "recovery_code")
     private String recoveryCode;
+
+    public User() {}
 
     public User(UserDTO data) {
         this.name = data.name();

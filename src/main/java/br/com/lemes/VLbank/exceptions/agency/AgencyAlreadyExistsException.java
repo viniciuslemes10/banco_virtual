@@ -1,4 +1,4 @@
-package br.com.lemes.VLbank.exceptions;
+package br.com.lemes.VLbank.exceptions.agency;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

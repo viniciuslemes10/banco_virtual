@@ -41,6 +41,7 @@ public class CurrentAndSavingsAccount extends Account {
         this.setAgency(agency);
         this.setCreatedDate(LocalDateTime.now());
         this.setUpdatedDate(LocalDateTime.now());
+        this.setBalance(data.balance());
         this.interestRate = BigDecimal.valueOf(0.008);
         this.interestFrequency = "MONTH";
         this.currentBalance = data.balance();

@@ -1,6 +1,6 @@
 package br.com.lemes.VLbank.service.agency;
 
-import br.com.lemes.VLbank.exceptions.AgencyAlreadyExistsException;
+import br.com.lemes.VLbank.exceptions.agency.AgencyAlreadyExistsException;
 import br.com.lemes.VLbank.exceptions.agency.AgencyNotFoundException;
 import br.com.lemes.VLbank.model.agency.Agency;
 import br.com.lemes.VLbank.record.agency.AgencyDTO;

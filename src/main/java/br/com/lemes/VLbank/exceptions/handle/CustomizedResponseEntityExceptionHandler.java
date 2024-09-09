@@ -1,6 +1,6 @@
 package br.com.lemes.VLbank.exceptions.handle;
 
-import br.com.lemes.VLbank.exceptions.AgencyAlreadyExistsException;
+import br.com.lemes.VLbank.exceptions.agency.AgencyAlreadyExistsException;
 import br.com.lemes.VLbank.exceptions.ExceptionResponse;
 import br.com.lemes.VLbank.exceptions.account.AccountNotFoundException;
 import br.com.lemes.VLbank.exceptions.account.AccountNumberAlreadyExistsException;
