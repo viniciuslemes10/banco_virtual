@@ -1,6 +1,7 @@
 package br.com.lemes.VLbank.model.bank;
 
 import br.com.lemes.VLbank.enums.bank.BankCode;
+import br.com.lemes.VLbank.model.agency.Agency;
 import br.com.lemes.VLbank.record.bank.BankDTO;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -21,6 +22,8 @@ public class Bank {
 
     @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Agency> agencies;
+
+    public Bank() {}
 
     public Bank(BankDTO data) {
         this.bankCode = data.bankCode();
