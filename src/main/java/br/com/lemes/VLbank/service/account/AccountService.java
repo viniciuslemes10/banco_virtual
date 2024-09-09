@@ -6,7 +6,7 @@ import br.com.lemes.VLbank.model.account.Account;
 import br.com.lemes.VLbank.model.account.CurrentAccount;
 import br.com.lemes.VLbank.model.account.CurrentAndSavingsAccount;
 import br.com.lemes.VLbank.model.account.SavingsAccount;
-import br.com.lemes.VLbank.model.bank.Agency;
+import br.com.lemes.VLbank.model.agency.Agency;
 import br.com.lemes.VLbank.model.bank.Bank;
 import br.com.lemes.VLbank.model.user.User;
 import br.com.lemes.VLbank.record.account.AccountDTO;
