@@ -1,22 +1,21 @@
 package br.com.lemes.VLbank.service.user;
 
-import br.com.lemes.VLbank.enums.account.AccountType;
 import br.com.lemes.VLbank.exceptions.account.AccountNotFoundException;
-import br.com.lemes.VLbank.exceptions.account.InvalidArgumentForAccountTypeException;
 import br.com.lemes.VLbank.model.user.User;
 import br.com.lemes.VLbank.record.account.AccountDTO;
 import br.com.lemes.VLbank.record.user.UserDTO;
 import br.com.lemes.VLbank.record.user.UserDetailsDTO;
 import br.com.lemes.VLbank.repositories.user.UserRepository;
 import br.com.lemes.VLbank.service.account.AccountService;
+import br.com.lemes.VLbank.service.agency.AgencyService;
+import br.com.lemes.VLbank.service.bank.BankService;
+import br.com.lemes.VLbank.utils.DTOValidator;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.EnumSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 @Slf4j
@@ -27,14 +26,22 @@ public class UserService {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private BankService bankService;
+
+    @Autowired
+    private AgencyService agencyService;
+
     @Transactional
     private User convertToEntity(UserDTO data) {
-        checkIfAccountTypeIsValid(data);
         checkIfAccountPresent(data);
+        DTOValidator.validateUserDTO(data);
 
         List<AccountDTO> accountListDTO = data.accounts().stream().toList();
 
         var user = new User(data);
+
+        checkIfBankAndAgencyAreValid(data.accounts());
 
         var userSaved = userRepository.save(user);
 
@@ -47,16 +54,11 @@ public class UserService {
         return userSaved;
     }
 
-    private void checkIfAccountTypeIsValid(UserDTO data) {
-        Set<AccountType> validAccountTypes = EnumSet.allOf(AccountType.class);
-
-        boolean allTypesValid = data.accounts().stream()
-                .map(AccountDTO::getAccountType)
-                .allMatch(validAccountTypes::contains);
-
-        if (!allTypesValid) {
-            throw new InvalidArgumentForAccountTypeException("One or more account types are invalid.");
-        }
+    private void checkIfBankAndAgencyAreValid(List<AccountDTO> accounts) {
+        accounts.forEach(account -> {
+            bankService.findById(account.bankId());
+            agencyService.findById(account.agencyId());
+        });
     }
 
     public User createUser(UserDTO data) {
