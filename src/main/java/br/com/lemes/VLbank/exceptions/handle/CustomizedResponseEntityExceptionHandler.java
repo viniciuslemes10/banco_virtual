@@ -1,5 +1,6 @@
 package br.com.lemes.VLbank.exceptions.handle;
 
+import br.com.lemes.VLbank.exceptions.ArgumentInvalidException;
 import br.com.lemes.VLbank.exceptions.agency.AgencyAlreadyExistsException;
 import br.com.lemes.VLbank.exceptions.ExceptionResponse;
 import br.com.lemes.VLbank.exceptions.account.AccountNotFoundException;
@@ -103,5 +104,14 @@ public class CustomizedResponseEntityExceptionHandler {
                 ex.getMessage(),
                 request.getDescription(false));
         return new ResponseEntity<>(exceptionResponse, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(ArgumentInvalidException.class)
+    public ResponseEntity<ExceptionResponse> handleArgumentInvalidException(Exception ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false));
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 }
