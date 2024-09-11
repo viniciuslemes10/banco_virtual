@@ -12,23 +12,35 @@ import java.util.List;
 import java.util.Set;
 
 public class DTOValidator {
+    public static final String NAME_FIELD = "Name";
+    public static final String EMAIL_FIELD = "Email";
+    public static final String PASSWORD_FIELD = "Password";
+    public static final String BALANCE_FIELD = "Balance";
+    public static final String ACCOUNT_NUMBER = "Account Number";
+    public static final String CPF_OR_CNPJ_FIELD = "CPF or CNPJ";
+    public static final String BANK_ID = "Bank ID";
+    public static final String AGENCY_ID = "Agency ID";
 
     public static void validateUserDTO(UserDTO data) {
-        validateField(data.name(), "Name");
-        validateField(data.email(), "Email");
-        validateField(data.password(), "Password");
+        validateField(data.name(), NAME_FIELD);
+        validateField(data.email(), EMAIL_FIELD);
+        validateField(data.password(), PASSWORD_FIELD);
         validateAddressDTO(data.address());
         validateAccountListDTO(data.accounts());
-        validateField(data.cpfOrCnpj(), "CPF or CNPJ");
+        validateField(data.cpfOrCnpj(), CPF_OR_CNPJ_FIELD);
     }
 
     private static void validateAccountListDTO(List<AccountDTO> accounts) {
+        if (accounts == null || accounts.isEmpty()) {
+            throw new ArgumentInvalidException("Accounts list cannot be null or empty.");
+        }
+
         accounts.forEach(account -> {
-            validateField(account.accountNumber(), "Account Number");
-            validateBalance(account.balance(), "Balance");
+            validateField(account.accountNumber(), ACCOUNT_NUMBER);
+            validateBalance(account.balance(), BALANCE_FIELD);
             checkIfAccountTypeIsValid(account.accountType());
-            validateId(account.bankId(), "Bank ID");
-            validateId(account.agencyId(), "Agency ID");
+            validateId(account.bankId(), BANK_ID);
+            validateId(account.agencyId(), AGENCY_ID);
         });
     }
 
