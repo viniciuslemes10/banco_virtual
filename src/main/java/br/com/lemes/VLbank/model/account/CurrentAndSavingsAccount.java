@@ -25,6 +25,9 @@ public class CurrentAndSavingsAccount extends Account {
     @Column(name = "current_balance")
     private BigDecimal currentBalance;
 
+    @Column(name = "account_limit")
+    private BigDecimal accountLimit;
+
     @Column(name = "savings_balance")
     private BigDecimal savingsBalance;
 

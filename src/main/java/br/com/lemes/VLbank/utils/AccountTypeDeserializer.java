@@ -1,7 +1,7 @@
-package br.com.lemes.VLbank.model.account;
+package br.com.lemes.VLbank.utils;
 
 import br.com.lemes.VLbank.enums.account.AccountType;
-import br.com.lemes.VLbank.exceptions.account.InvalidArgumentForAccountTypeException;
+import br.com.lemes.VLbank.exceptions.account.InvalidEnumArgumentException;
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -19,7 +19,7 @@ public class AccountTypeDeserializer extends JsonDeserializer<AccountType> {
         try {
             return AccountType.valueOf(value);
         } catch (IllegalArgumentException e) {
-            throw new InvalidArgumentForAccountTypeException("Invalid account type: " + value);
+            throw new InvalidEnumArgumentException("Invalid account type: " + value);
         }
     }
 }

@@ -79,4 +79,20 @@ public class AccountService {
 
         accountRepository.saveAll(accountList);
     }
+
+    public void isAccountNumberExists(String accountNumber) {
+        var existAccountNumber = accountRepository.existsByAccountNumber(accountNumber);
+
+        if(!existAccountNumber) {
+            throw new AccountNotFoundException("Account not found with that account number: " + accountNumber);
+        }
+    }
+
+    public Account findByAccountNumber(String accountNumber) {
+        return accountRepository.findByAccountNumber(accountNumber);
+    }
+
+    public Account save(Account account) {
+        return accountRepository.save(account);
+    }
 }

@@ -2,6 +2,7 @@ package br.com.lemes.VLbank.model.transaction;
 
 import br.com.lemes.VLbank.enums.transactions.ExpenseType;
 import br.com.lemes.VLbank.model.account.Account;
+import br.com.lemes.VLbank.record.transaction.TransactionDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -33,4 +34,12 @@ public class Transaction {
 
     @Column(name = "transaction_date", nullable = false)
     private LocalDate transactionDate;
+
+    public Transaction(TransactionDTO data, Account account) {
+        this.amount = data.amount();
+        this.expenseType = data.expenseType();
+        this.description = data.description();
+        this.account = account;
+        this.transactionDate = LocalDate.now();
+    }
 }

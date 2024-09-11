@@ -5,11 +5,12 @@ import br.com.lemes.VLbank.exceptions.agency.AgencyAlreadyExistsException;
 import br.com.lemes.VLbank.exceptions.ExceptionResponse;
 import br.com.lemes.VLbank.exceptions.account.AccountNotFoundException;
 import br.com.lemes.VLbank.exceptions.account.AccountNumberAlreadyExistsException;
-import br.com.lemes.VLbank.exceptions.account.InvalidArgumentForAccountTypeException;
+import br.com.lemes.VLbank.exceptions.account.InvalidEnumArgumentException;
 import br.com.lemes.VLbank.exceptions.account.InvalidBalanceException;
 import br.com.lemes.VLbank.exceptions.agency.AgencyNotFoundException;
 import br.com.lemes.VLbank.exceptions.bank.BankNotFoundException;
 import br.com.lemes.VLbank.exceptions.bank.InvalidBankCodeException;
+import br.com.lemes.VLbank.exceptions.transaction.InsufficientFundsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +42,7 @@ public class CustomizedResponseEntityExceptionHandler {
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(InvalidArgumentForAccountTypeException.class)
+    @ExceptionHandler(InvalidEnumArgumentException.class)
     public ResponseEntity<ExceptionResponse> handleInvalidArgumentForAccountTypeException(
             Exception ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(
@@ -108,6 +109,15 @@ public class CustomizedResponseEntityExceptionHandler {
 
     @ExceptionHandler(ArgumentInvalidException.class)
     public ResponseEntity<ExceptionResponse> handleArgumentInvalidException(Exception ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false));
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InsufficientFundsException.class)
+    public ResponseEntity<ExceptionResponse> handleInsufficientFundsException(Exception ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(
                 new Date(),
                 ex.getMessage(),
